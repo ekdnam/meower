@@ -5,7 +5,7 @@ const app = express();
 
 app.get("/", (req, res) => {
     res.json({
-        message: "Meower!"
+        message: "Meow!"
     })
 });
 
