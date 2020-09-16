@@ -1,8 +1,13 @@
 const express = require('express');
 const cors = require('cors');
+const monk = require('monk');
 
 // create express application
 const app = express();
+
+// add database conn
+const db = monk('localhost/meower');
+const mews = db.get('mews');
 
 app.use(cors());
 app.use(express.json());
@@ -25,6 +30,11 @@ app.post('/mews', (req, res) => {
             content: req.body.content.toString()
         };
         console.log(mew);
+        mews
+            .insert(mew)
+            .then(createdMew => {
+                res.json(createdMew);
+            });
     } else {
         res.status(422);
         res.json({
