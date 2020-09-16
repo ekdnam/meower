@@ -27,7 +27,8 @@ app.post('/mews', (req, res) => {
         // insert into db
         const mew = {
             name: req.body.name.toString(),
-            content: req.body.content.toString()
+            content: req.body.content.toString(),
+            created: new Date()
         };
         console.log(mew);
         mews

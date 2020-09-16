@@ -23,10 +23,13 @@ form.addEventListener('submit', (event) => {
     loadingElement.style.display = '';
 
     fetch(API_URL, {
-        method: 'POST',
-        body: JSON.stringify(mew),
-        headers: {
-            'content-type': 'application/json'
-        }
-    });
+            method: 'POST',
+            body: JSON.stringify(mew),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then(response => response.json())
+        .then(createdMew => {
+            console.log(createdMew)
+        });
 });
