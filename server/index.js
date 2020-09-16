@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const monk = require('monk');
+const Filter = require('bad-words');
 
 // create express application
 const app = express();
@@ -8,9 +9,11 @@ const app = express();
 // add database conn
 const db = monk('localhost/meower');
 const mews = db.get('mews');
+const filter = new Filter();
 
 app.use(cors());
 app.use(express.json());
+const Filter = require('bad-words');
 
 app.get("/", (req, res) => {
     res.json({
@@ -34,8 +37,8 @@ app.post('/mews', (req, res) => {
     if (isValidMew(req.body)) {
         // insert into db
         const mew = {
-            name: req.body.name.toString(),
-            content: req.body.content.toString(),
+            name: filter.clean(req.body.name.toString()),
+            content: filter.clean(req.body.content.toString()),
             created: new Date()
         };
         console.log(mew);
