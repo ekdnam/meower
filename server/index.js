@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const monk = require('monk');
 const Filter = require('bad-words');
+const rateLimit = require('express-rate-limit');
 
 // create express application
 const app = express();
@@ -11,9 +12,14 @@ const db = monk('localhost/meower');
 const mews = db.get('mews');
 const filter = new Filter();
 
+const limiter = rateLimit({
+    windowMs: 300 * 1000, // 30 seconds
+    max: 1 // limit each IP to 1 requests per windowMs
+});
+
 app.use(cors());
 app.use(express.json());
-const Filter = require('bad-words');
+
 
 app.get("/", (req, res) => {
     res.json({
@@ -32,6 +38,8 @@ app.get('/mews', (req, res) => {
 function isValidMew(mew) {
     return mew.name && mew.name.toString().trim() !== '' && mew.content && mew.content.toString().trim() !== '';
 }
+
+// app.use(limiter);
 
 app.post('/mews', (req, res) => {
     if (isValidMew(req.body)) {

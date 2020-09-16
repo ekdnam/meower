@@ -36,8 +36,10 @@ form.addEventListener('submit', (event) => {
         .then(createdMew => {
             // console.log(createdMew);
             form.reset();
-            form.style.display = '';
+            // setTimeout(() => {
+            // }, 30000);
             listAllMews();
+            form.style.display = '';
             loadingElement.style.display = 'none'
         });
 });
