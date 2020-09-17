@@ -1,13 +1,19 @@
 console.log("Hello World");
 
 // document means client-side js
+// select form class from html page
 const form = document.querySelector('form');
+// select the contents which are stored in a loading class ie the gif
 const loadingElement = document.querySelector('.loading');
+// select the contents stored in the mews class
 const mewsElement = document.querySelector('.mews');
+// where the server is
 const API_URL = "http://localhost:5000/mews";
 
+// hide the loading gif
 loadingElement.style.display = "none";
 
+// show all previous mews
 listAllMews();
 
 form.addEventListener('submit', (event) => {

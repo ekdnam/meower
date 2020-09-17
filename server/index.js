@@ -1,7 +1,12 @@
+// get node express module. install it by npm i express
 const express = require('express');
+// simplifies accepting responses and sending requests to the client. install it by npm i cors
 const cors = require('cors');
+// connect with mongodb. npm i monk
 const monk = require('monk');
+// bad-words automatically removes profanities from the entered text. npm i bad-words
 const Filter = require('bad-words');
+// manage number if requests sent to the server. 
 const rateLimit = require('express-rate-limit');
 
 // create express application
